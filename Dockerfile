@@ -21,18 +21,18 @@ RUN apt-get update && \
       apt-get install -y pkg-config autoconf automake libtool ragel
 
 # Build x264
-FROM emsdk-base AS x264-builder
-ENV X264_BRANCH=4-cores
-ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
-COPY build/x264.sh /src/build.sh
-RUN bash -x /src/build.sh
+#FROM emsdk-base AS x264-builder
+#ENV X264_BRANCH=4-cores
+#ADD https://github.com/ffmpegwasm/x264.git#$X264_BRANCH /src
+#COPY build/x264.sh /src/build.sh
+#RUN bash -x /src/build.sh
 
 # Build x265
-FROM emsdk-base AS x265-builder
-ENV X265_BRANCH=3.4
-ADD https://github.com/ffmpegwasm/x265.git#$X265_BRANCH /src
-COPY build/x265.sh /src/build.sh
-RUN bash -x /src/build.sh
+#FROM emsdk-base AS x265-builder
+#ENV X265_BRANCH=3.4
+#ADD https://github.com/ffmpegwasm/x265.git#$X265_BRANCH /src
+#COPY build/x265.sh /src/build.sh
+#RUN bash -x /src/build.sh
 
 # Build libvpx
 FROM emsdk-base AS libvpx-builder
@@ -128,8 +128,8 @@ RUN bash -x /src/build.sh
 FROM emsdk-base AS ffmpeg-base
 RUN embuilder build sdl2 sdl2-mt
 ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
-COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=x265-builder $INSTALL_DIR $INSTALL_DIR
+#COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
+#COPY --from=x265-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=libvpx-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=lame-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
@@ -143,8 +143,8 @@ FROM ffmpeg-base AS ffmpeg-builder
 COPY build/ffmpeg.sh /src/build.sh
 RUN bash -x /src/build.sh \
       --enable-gpl \
-      --enable-libx264 \
-      --enable-libx265 \
+#      --enable-libx264 \
+#      --enable-libx265 \
       --enable-libvpx \
       --enable-libmp3lame \
       --enable-libtheora \
@@ -163,8 +163,8 @@ COPY src/fftools /src/src/fftools
 COPY build/ffmpeg-wasm.sh build.sh
 # libraries to link
 ENV FFMPEG_LIBS \
-      -lx264 \
-      -lx265 \
+#      -lx264 \
+#      -lx265 \
       -lvpx \
       -lmp3lame \
       -logg \
