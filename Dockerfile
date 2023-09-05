@@ -36,11 +36,11 @@ RUN apt-get update && \
 #RUN bash -x /src/build.sh
 
 # Build libvpx
-FROM emsdk-base AS libvpx-builder
-ENV LIBVPX_BRANCH=v1.9.0
-ADD https://github.com/ffmpegwasm/libvpx.git#$LIBVPX_BRANCH /src
-COPY build/libvpx.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS libvpx-builder
+# ENV LIBVPX_BRANCH=v1.9.0
+# ADD https://github.com/ffmpegwasm/libvpx.git#$LIBVPX_BRANCH /src
+# COPY build/libvpx.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build lame
 FROM emsdk-base AS lame-builder
@@ -131,7 +131,7 @@ RUN embuilder build sdl2 sdl2-mt
 ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
 #COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
 #COPY --from=x265-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=libvpx-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=libvpx-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=lame-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=theora-builder $INSTALL_DIR $INSTALL_DIR
@@ -146,7 +146,7 @@ RUN bash -x /src/build.sh \
       --enable-gpl \
 #      --enable-libx264 \
 #      --enable-libx265 \
-      --enable-libvpx \
+      # --enable-libvpx \
       --enable-libmp3lame \
       --enable-libtheora \
       --enable-libvorbis \
@@ -166,7 +166,7 @@ COPY build/ffmpeg-wasm.sh build.sh
 ENV FFMPEG_LIBS \
 #      -lx264 \
 #      -lx265 \
-      -lvpx \
+      # -lvpx \
       -lmp3lame \
       -logg \
       -ltheora \
