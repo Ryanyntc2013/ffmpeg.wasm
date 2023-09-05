@@ -43,11 +43,11 @@ RUN apt-get update && \
 # RUN bash -x /src/build.sh
 
 # Build lame
-FROM emsdk-base AS lame-builder
-ENV LAME_BRANCH=master
-ADD https://github.com/ffmpegwasm/lame.git#$LAME_BRANCH /src
-COPY build/lame.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS lame-builder
+# ENV LAME_BRANCH=master
+# ADD https://github.com/ffmpegwasm/lame.git#$LAME_BRANCH /src
+# COPY build/lame.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build ogg
 FROM emsdk-base AS ogg-builder
@@ -132,7 +132,7 @@ ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
 #COPY --from=x264-builder $INSTALL_DIR $INSTALL_DIR
 #COPY --from=x265-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=libvpx-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=lame-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=lame-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=theora-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=vorbis-builder $INSTALL_DIR $INSTALL_DIR
@@ -147,7 +147,7 @@ RUN bash -x /src/build.sh \
 #      --enable-libx264 \
 #      --enable-libx265 \
       # --enable-libvpx \
-      --enable-libmp3lame \
+      # --enable-libmp3lame \
       --enable-libtheora \
       --enable-libvorbis \
       --enable-libopus \
@@ -167,7 +167,7 @@ ENV FFMPEG_LIBS \
 #      -lx264 \
 #      -lx265 \
       # -lvpx \
-      -lmp3lame \
+      # -lmp3lame \
       -logg \
       -ltheora \
       -lvorbis \
