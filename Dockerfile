@@ -168,7 +168,7 @@ ENV FFMPEG_LIBS \
 #      -lx265 \
       # -lvpx \
       # -lmp3lame \
-      -logg \
+      # -logg \
       # -ltheora \
       # -lvorbis \
       # -lvorbisenc \
