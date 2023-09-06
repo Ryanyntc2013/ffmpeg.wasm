@@ -57,19 +57,19 @@ COPY build/ogg.sh /src/build.sh
 RUN bash -x /src/build.sh
 
 # Build theora
-FROM emsdk-base AS theora-builder
-COPY --from=ogg-builder $INSTALL_DIR $INSTALL_DIR
-ENV THEORA_BRANCH=v1.1.1
-ADD https://github.com/ffmpegwasm/theora.git#$THEORA_BRANCH /src
-COPY build/theora.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS theora-builder
+# COPY --from=ogg-builder $INSTALL_DIR $INSTALL_DIR
+# ENV THEORA_BRANCH=v1.1.1
+# ADD https://github.com/ffmpegwasm/theora.git#$THEORA_BRANCH /src
+# COPY build/theora.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build opus
-FROM emsdk-base AS opus-builder
-ENV OPUS_BRANCH=v1.3.1
-ADD https://github.com/ffmpegwasm/opus.git#$OPUS_BRANCH /src
-COPY build/opus.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS opus-builder
+# ENV OPUS_BRANCH=v1.3.1
+# ADD https://github.com/ffmpegwasm/opus.git#$OPUS_BRANCH /src
+# COPY build/opus.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build vorbis
 FROM emsdk-base AS vorbis-builder
@@ -95,35 +95,35 @@ COPY build/libwebp.sh /src/build.sh
 RUN bash -x /src/build.sh
 
 # Build freetype2
-FROM emsdk-base AS freetype2-builder
-ENV FREETYPE2_BRANCH=VER-2-10-4
-ADD https://github.com/ffmpegwasm/freetype2.git#$FREETYPE2_BRANCH /src
-COPY build/freetype2.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS freetype2-builder
+# ENV FREETYPE2_BRANCH=VER-2-10-4
+# ADD https://github.com/ffmpegwasm/freetype2.git#$FREETYPE2_BRANCH /src
+# COPY build/freetype2.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build fribidi
-FROM emsdk-base AS fribidi-builder
-ENV FRIBIDI_BRANCH=v1.0.9
-ADD https://github.com/fribidi/fribidi.git#$FRIBIDI_BRANCH /src
-COPY build/fribidi.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS fribidi-builder
+# ENV FRIBIDI_BRANCH=v1.0.9
+# ADD https://github.com/fribidi/fribidi.git#$FRIBIDI_BRANCH /src
+# COPY build/fribidi.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build harfbuzz
-FROM emsdk-base AS harfbuzz-builder
-ENV HARFBUZZ_BRANCH=5.2.0
-ADD https://github.com/harfbuzz/harfbuzz.git#$HARFBUZZ_BRANCH /src
-COPY build/harfbuzz.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS harfbuzz-builder
+# ENV HARFBUZZ_BRANCH=5.2.0
+# ADD https://github.com/harfbuzz/harfbuzz.git#$HARFBUZZ_BRANCH /src
+# COPY build/harfbuzz.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build libass
-FROM emsdk-base AS libass-builder
-COPY --from=freetype2-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=fribidi-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=harfbuzz-builder $INSTALL_DIR $INSTALL_DIR
-ENV LIBASS_BRANCH=0.15.0
-ADD https://github.com/libass/libass.git#$LIBASS_BRANCH /src
-COPY build/libass.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS libass-builder
+# COPY --from=freetype2-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=fribidi-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=harfbuzz-builder $INSTALL_DIR $INSTALL_DIR
+# ENV LIBASS_BRANCH=0.15.0
+# ADD https://github.com/libass/libass.git#$LIBASS_BRANCH /src
+# COPY build/libass.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Base ffmpeg image with dependencies and source code populated.
 FROM emsdk-base AS ffmpeg-base
@@ -133,11 +133,11 @@ ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
 #COPY --from=x265-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=libvpx-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=lame-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=theora-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=theora-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=vorbis-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=libwebp-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=libass-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=libass-builder $INSTALL_DIR $INSTALL_DIR
 
 # Build ffmpeg
 FROM ffmpeg-base AS ffmpeg-builder
@@ -148,14 +148,14 @@ RUN bash -x /src/build.sh \
 #      --enable-libx265 \
       # --enable-libvpx \
       # --enable-libmp3lame \
-      --enable-libtheora \
+      # --enable-libtheora \
       --enable-libvorbis \
-      --enable-libopus \
+      # --enable-libopus \
       --enable-zlib \
-      --enable-libwebp \
-      --enable-libfreetype \
-      --enable-libfribidi \
-      --enable-libass
+      --enable-libwebp 
+      # --enable-libfreetype \
+      # --enable-libfribidi \
+      # --enable-libass
 
 # Build ffmpeg.wasm
 FROM ffmpeg-builder AS ffmpeg-wasm-builder
@@ -169,17 +169,17 @@ ENV FFMPEG_LIBS \
       # -lvpx \
       # -lmp3lame \
       -logg \
-      -ltheora \
+      # -ltheora \
       -lvorbis \
       -lvorbisenc \
       -lvorbisfile \
-      -lopus \
+      # -lopus \
       -lz \
-      -lwebp \
-      -lfreetype \
-      -lfribidi \
-      -lharfbuzz \
-      -lass
+      -lwebp 
+      # -lfreetype \
+      # -lfribidi \
+      # -lharfbuzz \
+      # -lass
 RUN mkdir -p /src/dist/umd && bash -x /src/build.sh \
       ${FFMPEG_LIBS} \
       -o dist/umd/ffmpeg-core.js
