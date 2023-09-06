@@ -21,7 +21,7 @@ CONF_FLAGS=(
   # -Llibswresample 
   -Llibswscale 
   # -lavcodec 
-  -lavdevice 
+  # -lavdevice 
   # -lavfilter 
   # -lavformat 
   -lavutil 
