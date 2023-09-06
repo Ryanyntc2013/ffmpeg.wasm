@@ -50,11 +50,11 @@ RUN apt-get update && \
 # RUN bash -x /src/build.sh
 
 # Build ogg
-FROM emsdk-base AS ogg-builder
-ENV OGG_BRANCH=v1.3.4
-ADD https://github.com/ffmpegwasm/Ogg.git#$OGG_BRANCH /src
-COPY build/ogg.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS ogg-builder
+# ENV OGG_BRANCH=v1.3.4
+# ADD https://github.com/ffmpegwasm/Ogg.git#$OGG_BRANCH /src
+# COPY build/ogg.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build theora
 # FROM emsdk-base AS theora-builder
@@ -80,19 +80,19 @@ RUN bash -x /src/build.sh
 # RUN bash -x /src/build.sh
 
 # Build zlib
-FROM emsdk-base AS zlib-builder
-ENV ZLIB_BRANCH=v1.2.11
-ADD https://github.com/ffmpegwasm/zlib.git#$ZLIB_BRANCH /src
-COPY build/zlib.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS zlib-builder
+# ENV ZLIB_BRANCH=v1.2.11
+# ADD https://github.com/ffmpegwasm/zlib.git#$ZLIB_BRANCH /src
+# COPY build/zlib.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build libwebp
-FROM emsdk-base AS libwebp-builder
-COPY --from=zlib-builder $INSTALL_DIR $INSTALL_DIR
-ENV LIBWEBP_BRANCH=v1.1.0
-ADD https://github.com/ffmpegwasm/libwebp.git#$LIBWEBP_BRANCH /src
-COPY build/libwebp.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS libwebp-builder
+# COPY --from=zlib-builder $INSTALL_DIR $INSTALL_DIR
+# ENV LIBWEBP_BRANCH=v1.1.0
+# ADD https://github.com/ffmpegwasm/libwebp.git#$LIBWEBP_BRANCH /src
+# COPY build/libwebp.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build freetype2
 # FROM emsdk-base AS freetype2-builder
@@ -136,14 +136,14 @@ ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
 # COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=theora-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=vorbis-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=libwebp-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=libwebp-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=libass-builder $INSTALL_DIR $INSTALL_DIR
 
 # Build ffmpeg
 FROM ffmpeg-base AS ffmpeg-builder
 COPY build/ffmpeg.sh /src/build.sh
 RUN bash -x /src/build.sh \
-      --enable-gpl \
+      --enable-gpl 
 #      --enable-libx264 \
 #      --enable-libx265 \
       # --enable-libvpx \
@@ -151,8 +151,8 @@ RUN bash -x /src/build.sh \
       # --enable-libtheora \
       # --enable-libvorbis \
       # --enable-libopus \
-      --enable-zlib \
-      --enable-libwebp 
+      # --enable-zlib \
+      # --enable-libwebp 
       # --enable-libfreetype \
       # --enable-libfribidi \
       # --enable-libass
@@ -175,7 +175,7 @@ ENV FFMPEG_LIBS \
       # -lvorbisfile \
       # -lopus \
       -lz \
-      -lwebp 
+      # -lwebp 
       # -lfreetype \
       # -lfribidi \
       # -lharfbuzz \
