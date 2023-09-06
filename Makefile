@@ -6,7 +6,7 @@ DEV_ARGS := --progress=plain
 
 DEV_CFLAGS := --profiling
 DEV_MT_CFLAGS := $(DEV_CFLAGS) $(MT_FLAGS)
-PROD_CFLAGS := -Os -msimd128
+PROD_CFLAGS := -Oz -msimd128
 PROD_MT_CFLAGS := $(PROD_CFLAGS) $(MT_FLAGS)
 
 clean:
