@@ -15,7 +15,7 @@ CONF_FLAGS=(
   # -Llibavcodec 
   -Llibavdevice 
   # -Llibavfilter 
-  -Llibavformat 
+  # -Llibavformat 
   -Llibavutil 
   # -Llibpostproc 
   # -Llibswresample 
@@ -23,7 +23,7 @@ CONF_FLAGS=(
   # -lavcodec 
   -lavdevice 
   # -lavfilter 
-  -lavformat 
+  # -lavformat 
   -lavutil 
   # -lpostproc 
   # -lswresample 
