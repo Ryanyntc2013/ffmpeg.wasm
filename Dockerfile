@@ -142,8 +142,8 @@ ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
 # Build ffmpeg
 FROM ffmpeg-base AS ffmpeg-builder
 COPY build/ffmpeg.sh /src/build.sh
-RUN bash -x /src/build.sh \
-      --enable-gpl 
+RUN bash -x /src/build.sh 
+      # --enable-gpl 
 #      --enable-libx264 \
 #      --enable-libx265 \
       # --enable-libvpx \
