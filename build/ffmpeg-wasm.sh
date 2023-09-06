@@ -13,7 +13,7 @@ CONF_FLAGS=(
   -I$INSTALL_DIR/include 
   -L$INSTALL_DIR/lib 
   -Llibavcodec 
-  -Llibavdevice 
+  # -Llibavdevice 
   # -Llibavfilter 
   -Llibavformat 
   -Llibavutil 
@@ -21,7 +21,7 @@ CONF_FLAGS=(
   -Llibswresample 
   -Llibswscale 
   -lavcodec 
-  -lavdevice 
+  # -lavdevice 
   # -lavfilter 
   -lavformat 
   -lavutil 
