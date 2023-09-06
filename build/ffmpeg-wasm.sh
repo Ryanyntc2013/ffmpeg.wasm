@@ -12,22 +12,22 @@ CONF_FLAGS=(
   -I./src/fftools 
   -I$INSTALL_DIR/include 
   -L$INSTALL_DIR/lib 
-  # -Llibavcodec 
-  # -Llibavdevice 
-  # -Llibavfilter 
-  # -Llibavformat 
-  # -Llibavutil 
-  # -Llibpostproc 
-  # -Llibswresample 
-  # -Llibswscale 
-  # -lavcodec 
-  # -lavdevice 
-  # -lavfilter 
-  # -lavformat 
-  # -lavutil 
-  # -lpostproc 
-  # -lswresample 
-  # -lswscale 
+  -Llibavcodec 
+  -Llibavdevice 
+  -Llibavfilter 
+  -Llibavformat 
+  -Llibavutil 
+  -Llibpostproc 
+  -Llibswresample 
+  -Llibswscale 
+  -lavcodec 
+  -lavdevice 
+  -lavfilter 
+  -lavformat 
+  -lavutil 
+  -lpostproc 
+  -lswresample 
+  -lswscale 
   -Wno-deprecated-declarations 
   $LDFLAGS 
   -sWASM_BIGINT                            # enable big int support
@@ -47,7 +47,7 @@ CONF_FLAGS=(
   src/fftools/ffmpeg_hw.c 
   src/fftools/ffmpeg_mux.c 
   src/fftools/ffmpeg_opt.c 
-  src/fftools/opt_common.c 
+  # src/fftools/opt_common.c 
 )
 
 emcc "${CONF_FLAGS[@]}" $@
