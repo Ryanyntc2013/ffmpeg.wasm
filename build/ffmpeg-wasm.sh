@@ -19,7 +19,7 @@ CONF_FLAGS=(
   -Llibavutil 
   # -Llibpostproc 
   -Llibswresample 
-  -Llibswscale 
+  # -Llibswscale 
   -lavcodec 
   -lavdevice 
   -lavfilter 
@@ -27,7 +27,7 @@ CONF_FLAGS=(
   -lavutil 
   # -lpostproc 
   -lswresample 
-  -lswscale 
+  # -lswscale 
   -Wno-deprecated-declarations 
   $LDFLAGS 
   -sWASM_BIGINT                            # enable big int support
