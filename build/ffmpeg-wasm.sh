@@ -12,17 +12,17 @@ CONF_FLAGS=(
   -I./src/fftools 
   -I$INSTALL_DIR/include 
   -L$INSTALL_DIR/lib 
-  -Llibavcodec 
+  # -Llibavcodec 
   -Llibavdevice 
-  -Llibavfilter 
+  # -Llibavfilter 
   -Llibavformat 
   -Llibavutil 
   # -Llibpostproc 
   # -Llibswresample 
   -Llibswscale 
-  -lavcodec 
+  # -lavcodec 
   -lavdevice 
-  -lavfilter 
+  # -lavfilter 
   -lavformat 
   -lavutil 
   # -lpostproc 
