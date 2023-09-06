@@ -72,12 +72,12 @@ RUN bash -x /src/build.sh
 # RUN bash -x /src/build.sh
 
 # Build vorbis
-FROM emsdk-base AS vorbis-builder
-COPY --from=ogg-builder $INSTALL_DIR $INSTALL_DIR
-ENV VORBIS_BRANCH=v1.3.3
-ADD https://github.com/ffmpegwasm/vorbis.git#$VORBIS_BRANCH /src
-COPY build/vorbis.sh /src/build.sh
-RUN bash -x /src/build.sh
+# FROM emsdk-base AS vorbis-builder
+# COPY --from=ogg-builder $INSTALL_DIR $INSTALL_DIR
+# ENV VORBIS_BRANCH=v1.3.3
+# ADD https://github.com/ffmpegwasm/vorbis.git#$VORBIS_BRANCH /src
+# COPY build/vorbis.sh /src/build.sh
+# RUN bash -x /src/build.sh
 
 # Build zlib
 FROM emsdk-base AS zlib-builder
@@ -135,7 +135,7 @@ ADD https://github.com/FFmpeg/FFmpeg.git#$FFMPEG_VERSION /src
 # COPY --from=lame-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=opus-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=theora-builder $INSTALL_DIR $INSTALL_DIR
-COPY --from=vorbis-builder $INSTALL_DIR $INSTALL_DIR
+# COPY --from=vorbis-builder $INSTALL_DIR $INSTALL_DIR
 COPY --from=libwebp-builder $INSTALL_DIR $INSTALL_DIR
 # COPY --from=libass-builder $INSTALL_DIR $INSTALL_DIR
 
@@ -149,7 +149,7 @@ RUN bash -x /src/build.sh \
       # --enable-libvpx \
       # --enable-libmp3lame \
       # --enable-libtheora \
-      --enable-libvorbis \
+      # --enable-libvorbis \
       # --enable-libopus \
       --enable-zlib \
       --enable-libwebp 
@@ -170,9 +170,9 @@ ENV FFMPEG_LIBS \
       # -lmp3lame \
       -logg \
       # -ltheora \
-      -lvorbis \
-      -lvorbisenc \
-      -lvorbisfile \
+      # -lvorbis \
+      # -lvorbisenc \
+      # -lvorbisfile \
       # -lopus \
       -lz \
       -lwebp 
