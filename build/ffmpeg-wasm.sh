@@ -12,21 +12,21 @@ CONF_FLAGS=(
   -I./src/fftools 
   -I$INSTALL_DIR/include 
   -L$INSTALL_DIR/lib 
-  # -Llibavcodec 
+  -Llibavcodec 
   -Llibavdevice 
-  # -Llibavfilter 
-  # -Llibavformat 
-  -Llibavutil 
+  -Llibavfilter 
+  -Llibavformat 
+  # -Llibavutil 
   # -Llibpostproc 
-  # -Llibswresample 
+  -Llibswresample 
   -Llibswscale 
-  # -lavcodec 
-  # -lavdevice 
-  # -lavfilter 
-  # -lavformat 
-  -lavutil 
+  -lavcodec 
+  -lavdevice 
+  -lavfilter 
+  -lavformat 
+  # -lavutil 
   # -lpostproc 
-  # -lswresample 
+  -lswresample 
   -lswscale 
   -Wno-deprecated-declarations 
   $LDFLAGS 
