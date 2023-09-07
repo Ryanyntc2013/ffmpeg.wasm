@@ -16,7 +16,7 @@ CONF_FLAGS=(
   -Llibavdevice 
   -Llibavfilter 
   -Llibavformat 
-  # -Llibavutil 
+  -Llibavutil 
   # -Llibpostproc 
   -Llibswresample 
   -Llibswscale 
@@ -24,7 +24,7 @@ CONF_FLAGS=(
   -lavdevice 
   -lavfilter 
   -lavformat 
-  # -lavutil 
+  -lavutil 
   # -lpostproc 
   -lswresample 
   -lswscale 
